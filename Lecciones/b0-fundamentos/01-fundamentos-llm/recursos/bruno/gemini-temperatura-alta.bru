@@ -1,0 +1,40 @@
+meta {
+  name: gemini temperatura alta
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{geminiBaseUrl}}/models/{{geminiModel}}:generateContent
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-goog-api-key: {{geminiApiKey}}
+}
+
+body:json {
+  {
+    "contents": [
+      {
+        "parts": [
+          { "text": "Dime tres usos típicos del lenguaje Java en producción" }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "temperature": 1.5
+    }
+  }
+}
+
+docs {
+  La misma pregunta que gemini-temperatura-baja, pero con temperature 1.5.
+  Lanza esta petición tres veces y compara con las tres respuestas a temperatura 0.0.
+
+  Resultado esperado: con 1.5 las respuestas son coherentes pero el orden, las palabras
+  y los ejemplos cambian sustancialmente. A veces el modelo se va por las ramas o
+  introduce errores que no aparecían a temperatura baja.
+}
