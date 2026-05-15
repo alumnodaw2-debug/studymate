@@ -1,0 +1,38 @@
+meta {
+  name: gemini hola mundo
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{geminiBaseUrl}}/models/{{geminiModel}}:generateContent
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-goog-api-key: {{geminiApiKey}}
+}
+
+body:json {
+  {
+    "contents": [
+      {
+        "parts": [
+          { "text": "Explícame qué es un LLM en dos frases" }
+        ]
+      }
+    ]
+  }
+}
+
+docs {
+  Primera llamada a Gemini. Sin generationConfig: usa los valores por defecto del modelo
+  (temperature ~1.0). Por eso, lanzada tres veces seguidas, las respuestas varían.
+
+  Antes de lanzar:
+    - Selecciona el entorno 'local' en Bruno (esquina superior derecha).
+    - Pega tu API key en la variable secreta geminiApiKey (botón "secret" del entorno).
+    - NO commitees el valor: vive sólo en tu Bruno local.
+}

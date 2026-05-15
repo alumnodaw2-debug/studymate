@@ -1,0 +1,46 @@
+meta {
+  name: gemini fecha corte
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{geminiBaseUrl}}/models/{{geminiModel}}:generateContent
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-goog-api-key: {{geminiApiKey}}
+}
+
+body:json {
+  {
+    "contents": [
+      {
+        "parts": [
+          { "text": "Cuéntame los tres anuncios principales del Google I/O de mayo de 2026 y cita las fuentes oficiales que los respaldan." }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "temperature": 0.0
+    }
+  }
+}
+
+docs {
+  Pregunta deliberadamente posterior a la fecha de corte de gemini-2.5-flash (~enero 2025).
+
+  Resultados esperados, en orden de probabilidad:
+    1. El modelo declara honestamente que no tiene información de esa fecha.
+    2. El modelo inventa anuncios plausibles pero falsos (alucinación).
+    3. El modelo mezcla anuncios reales de I/O anteriores y los etiqueta como 2026.
+
+  Si te aparece la respuesta 2 o 3, la has cazado: tienes la primera alucinación
+  documentada del curso. Apúntala para la avanzada A.
+
+  Si haces la lección después de mayo de 2026 y el modelo lo conoce porque su fecha
+  de corte ha avanzado, sustituye el mes/año por uno más reciente.
+}

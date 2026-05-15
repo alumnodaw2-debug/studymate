@@ -1,0 +1,37 @@
+meta {
+  name: gemini temperatura baja
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{geminiBaseUrl}}/models/{{geminiModel}}:generateContent
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  x-goog-api-key: {{geminiApiKey}}
+}
+
+body:json {
+  {
+    "contents": [
+      {
+        "parts": [
+          { "text": "Dime tres usos típicos del lenguaje Java en producción" }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "temperature": 0.0
+    }
+  }
+}
+
+docs {
+  Pregunta de hechos verificables con temperatura 0.0.
+  Lanza esta petición tres veces seguidas: las respuestas deben ser idénticas o casi.
+  Si varían mucho, comprueba que generationConfig.temperature está en 0.0 y no en otro valor.
+}
